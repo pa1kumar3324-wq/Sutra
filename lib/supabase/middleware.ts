@@ -26,9 +26,10 @@ export async function updateSession(request: NextRequest) {
     url.search = path === '/' ? '' : `?next=${encodeURIComponent(path)}`;
     return NextResponse.redirect(url);
   }
-  if (user && path === '/login') {
-    const url = request.nextUrl.clone(); url.pathname = '/'; url.search = '';
-    return NextResponse.redirect(url);
-  }
+  // Do not redirect authenticated users away from /login here.
+  // An authenticated user without an active organization membership is sent
+  // from / to /login by requireContext(); redirecting them back to / creates
+  // an infinite redirect loop. Let the login page render so they can see the
+  // access error and recover.
   return response;
 }
