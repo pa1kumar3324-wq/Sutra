@@ -414,6 +414,14 @@ begin
   return nid;
 end $$;
 
+REVOKE EXECUTE ON FUNCTION public.create_class_session(uuid, date, text, uuid[], text) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.set_session_topics(uuid, uuid[], text) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.save_attendance(uuid, jsonb) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.save_assessment_results(uuid, jsonb, text) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.complete_assessment(uuid) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.transfer_enrollment(uuid, uuid, date) FROM PUBLIC, anon;
+
+-- Keep the existing GRANT statements below these.
 grant execute on function create_class_session(uuid, date, text, uuid[], text) to authenticated;
 grant execute on function set_session_topics(uuid, uuid[], text) to authenticated;
 grant execute on function save_attendance(uuid, jsonb) to authenticated;
