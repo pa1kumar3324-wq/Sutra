@@ -11,6 +11,17 @@ export function Mark({ className }: { className?: string }) {
   );
 }
 
+export const EMPORUM_URL = 'https://emporum.netlify.app/';
+
+/** The quiet "by Emporum" line as a link to the studio site. Styling is supplied by the caller so it stays as subtle as before. */
+export function EmporumLink({ className }: { className?: string }) {
+  return (
+    <a href={EMPORUM_URL} target="_blank" rel="noopener noreferrer" className={className}>
+      by Emporum
+    </a>
+  );
+}
+
 /** Sutra is the product; "by Emporum" is a quiet secondary line and is deliberately small. */
 export function Logo({ size = 'md', showAttribution = true }: { size?: 'md' | 'lg'; showAttribution?: boolean }) {
   const lg = size === 'lg';
@@ -19,7 +30,7 @@ export function Logo({ size = 'md', showAttribution = true }: { size?: 'md' | 'l
       <Mark className={lg ? 'w-9' : 'w-6'} />
       <span className="flex flex-col leading-none">
         <span className={clsx('font-semibold tracking-[0.16em]', lg ? 'text-3xl' : 'text-[17px]')}>Sutra</span>
-        {showAttribution && <span className={clsx('font-mono text-muted', lg ? 'mt-2 text-[11px] tracking-[0.14em]' : 'mt-1 text-[9.5px] tracking-[0.14em]')}>by Emporum</span>}
+        {showAttribution && <EmporumLink className={clsx('font-mono text-muted', lg ? 'mt-2 text-[11px] tracking-[0.14em]' : 'mt-1 text-[9.5px] tracking-[0.14em]')} />}
       </span>
     </span>
   );
